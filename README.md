@@ -6,6 +6,8 @@ Agents leave timestamped notes when something misled them; you review, edit the 
 
 ## Install
 
+Paths below follow the [Agent Skills specification](https://agentskills.io/specification) (`.agents/skills/`). Adapt for your host if skills live elsewhere.
+
 ```bash
 git clone https://github.com/crayment/meta-skill-feedback.git
 ln -s "$(pwd)/meta-skill-feedback/.agents/skills/meta-skill-feedback" \

@@ -32,8 +32,8 @@ Typical ask: *“Use **meta-skill-feedback** to add a feedback system to &lt;tar
 
 Read the target skill first. Adapt layout and cues to **how that skill actually
 works** — interactive triage, one-shot CLI, wiki-backed rules, etc. The convention
-is fixed; the wiring is not. **Scheduled wake/run prompts** for unattended agents
-are out of scope — do not create or patch them from this skill.
+is fixed; the wiring is not. **Scheduled or automated run prompts** for unattended
+agents are out of scope — do not create or patch them from this skill.
 
 1. Read [references/convention.md](references/convention.md) and
    [references/bootstrap.md](references/bootstrap.md).
@@ -48,7 +48,7 @@ are out of scope — do not create or patch them from this skill.
    [references/cue-points.md](references/cue-points.md):
    - Required: **Before you finish** (or equivalent) near the end of `SKILL.md`
    Match the target skill's voice and section names; do not paste boilerplate
-   blindly if Iron laws or a final-report step already exists — extend those.
+   blindly if a hard-rules section or final-report step already exists — extend those.
 5. **Verify** by reading back: an agent finishing a routine run knows to skip;
    an agent hitting repeat friction knows to vote +1 on an open note.
 6. Summarize for the human what you added and where. Do **not** seed example friction
@@ -85,4 +85,4 @@ edit skill, move notes to `resolved/`.
 | [references/review.md](references/review.md) | Review and resolve workflow |
 | [references/evals.md](references/evals.md) | PAC eval harness (v0 fixtures) |
 
-Human overview (phone-friendly): [evals/overview.html](evals/overview.html) · [rendered on GitHub Pages](https://crayment.github.io/meta-skill-feedback/overview.html)
+Readable HTML overview: [evals/overview.html](evals/overview.html) · [rendered on GitHub Pages](https://crayment.github.io/meta-skill-feedback/overview.html)

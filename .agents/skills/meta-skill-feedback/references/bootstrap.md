@@ -7,8 +7,8 @@ skill). Load meta-skill-feedback first; do not bootstrap from memory alone.
 
 Use judgment; adapt names, sections, and cues to that skill's shape.
 
-**Out of scope:** scheduled wake/run prompts for unattended agents. If you want
-feedback cues on unattended runs, patch your scheduler's wake prompt separately —
+**Out of scope:** scheduled or automated run prompts for unattended agents. If you want
+feedback cues on unattended runs, patch your automation entrypoint separately —
 not via this meta-skill.
 
 ## Minimum deliverables
@@ -89,9 +89,9 @@ _(none yet)_
 | **Public skill** | README note: entries must stay generic; optional gitignore for `feedback/*.md` |
 | **Skill with evals** | Link `evals/examples/*.md` from README as the live format sample |
 
-## Iron laws vs new section
+## Hard rules vs new section
 
-If the target skill already has **Iron laws** or a **Final report** checklist,
+If the target skill already has a **hard rules** (non-negotiable constraints) or **Final report** checklist,
 add feedback there instead of a redundant **Before you finish** — one pointer to
 `feedback/README.md` is enough.
 
@@ -99,7 +99,7 @@ add feedback there instead of a redundant **Before you finish** — one pointer 
 
 - Run a one-size-fits-all script that blind-patches every skill the same way
 - Add cues in every reference file
-- Create or patch scheduled wake/run prompts (separate system)
+- Create or patch scheduled or automated run prompts (separate system)
 - Create friction files as part of bootstrap (unless you hit real friction)
 - Replace task-specific outputs (proposals, Slack reports) with feedback files
 

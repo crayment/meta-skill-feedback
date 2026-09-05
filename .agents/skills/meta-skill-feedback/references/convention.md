@@ -33,12 +33,12 @@ YYYY-MM-DDTHHMM-<slug>.md
 
 - **Timestamp required** — local time is fine; use the run's wall clock.
 - **Slug** — lowercase, hyphens, ~3–6 words, agent's choice (human scan aid).
-- **Collision** (same minute) — append `-2` or a short bc/id suffix.
+- **Collision** (same minute) — append `-2` or a short run-id suffix.
 
 Examples:
 
 - `2026-08-29T1130-wrong-path-in-step-two.md`
-- `2026-08-29T1130-actions-md-unicode-append-bc7b8f6.md`
+- `2026-08-29T1130-actions-md-unicode-append-a1b2c3d.md`
 
 ## File body template (new issue)
 
@@ -67,7 +67,7 @@ Heading slots (omit unknowns, don't invent):
 
 | Slot | Examples |
 |------|----------|
-| id | `bc-7b8f6238-…`, `local — Cursor` |
+| id | `run-7b8f6238`, `local`, `session-abc123` |
 | role/title | `email-triage`, `deploy-check` |
 | machine | `ci-runner`, `local-dev-machine` |
 
@@ -84,7 +84,7 @@ Before creating a file, **skim open notes** in `feedback/` (not README).
 **Vote line** (under `## Votes`):
 
 ```markdown
-- **2026-09-05T1024** — bc-abc123 · +1
+- **2026-09-05T1024** — run-abc123 · +1
 ```
 
 Use `· opened` on the first line only; later lines use `· +1`. Optional brief
@@ -93,7 +93,7 @@ note after `+1` on the same line.
 **Agent comment** (under `## Agent comments`):
 
 ```markdown
-### 2026-09-05T1024 — bc-abc123 · local-dev-machine
+### 2026-09-05T1024 — run-abc123 · local-dev-machine
 +1 — same wrong path; used workaround X.
 ```
 

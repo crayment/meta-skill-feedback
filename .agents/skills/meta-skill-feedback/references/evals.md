@@ -54,7 +54,7 @@ See **[evals/overview.html](../evals/overview.html)** (symlink to [docs/overview
 | 4 | runtime-vote | Same bug open → +1 on existing note, no duplicate file |
 | 5 | runtime-stuck | Script fails → friction note, don't patch SKILL.md |
 
-Scheduled wake/run prompts are **not** part of this skill or its evals.
+Scheduled or automated run prompts are **not** part of this skill or its evals.
 
 ## Rules
 

@@ -3,13 +3,13 @@
 Goal: agents **see** the feedback path without loading this meta-skill. Use **one
 touchpoint** in the target skill — end of `SKILL.md`.
 
-Scheduled wake/run prompts for unattended agents are **out of scope** for this
-meta-skill. Patch your scheduler's wake prompt separately if you want unattended
+Scheduled or automated run prompts for unattended agents are **out of scope** for this
+meta-skill. Patch your automation entrypoint separately if you want unattended
 runs to see the feedback path.
 
 ## Required — end of SKILL.md
 
-Add a **Before you finish** section (or fold into **Iron laws** if the skill
+Add a **Before you finish** section (or fold into an existing **hard rules** section if the skill
 already has one). Keep to ~5 lines:
 
 ```markdown
@@ -20,13 +20,13 @@ write **one file** in `feedback/` — see [feedback/README.md](feedback/README.m
 Do not edit this skill. Skip when the run was routine.
 ```
 
-Extend existing **Iron laws** or **Final report** sections instead when that
+Extend existing **hard rules** or **Final report** sections instead when that
 fits the target skill better.
 
 ## Optional — second cue (rare)
 
 Add **one** extra cue only where agents repeatedly get lost mid-workflow — and
-only in `SKILL.md` or a domain reference file, not in scheduler wake prompts:
+only in `SKILL.md` or a domain reference file, not in automation run prompts:
 
 | Skill shape | Where |
 |-------------|--------|
