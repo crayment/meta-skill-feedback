@@ -22,7 +22,7 @@ From this repo root:
 
 ```bash
 SKILL=./.agents/skills/meta-skill-feedback
-PAC=~/dev/me/dotfiles/agents/skills/provider-agnostic-skill-creator
+PAC=~/dev/me/provider-agnostic-skill-creator/.agents/skills/provider-agnostic-skill-creator
 WS=./meta-skill-feedback-workspace/iteration-N
 FIX=$SKILL/evals/fixtures
 CHK=$SKILL/scripts/check_eval_outputs.py
