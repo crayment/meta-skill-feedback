@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
-# Serve meta-skill-feedback eval docs for phone/desktop review.
+# Serve meta-skill-feedback eval docs for local review.
 # Usage: serve-eval-docs.sh [port]
 #   overview.html — skill + eval explainer
-#   review.html   — PAC benchmark viewer (iteration-2)
+#   review.html   — PAC benchmark viewer (when present in MSF_EVAL_WORKSPACE)
 
 set -euo pipefail
 
 PORT="${1:-8765}"
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-WS="${MSF_EVAL_WORKSPACE:-$(cd "$SKILL_DIR/../../.." && pwd)/meta-skill-feedback-workspace/iteration-2}"
+REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
+DEFAULT_WS="$REPO_ROOT/meta-skill-feedback-workspace"
+if [[ -n "${MSF_EVAL_WORKSPACE:-}" ]]; then
+  WS="$MSF_EVAL_WORKSPACE"
+elif [[ -f "$DEFAULT_WS/review.html" ]]; then
+  WS="$DEFAULT_WS"
+else
+  latest="$(find "$DEFAULT_WS" -maxdepth 1 -type d -name 'iteration-*' 2>/dev/null | sort -V | tail -1 || true)"
+  WS="${latest:-$DEFAULT_WS}"
+fi
 STAGE="${MSF_EVAL_STAGE:-/tmp/msf-eval-docs-serve}"
 PIDFILE="${TMPDIR:-/tmp}/msf-eval-docs.pid"
 LOG="${TMPDIR:-/tmp}/msf-eval-docs.log"
@@ -30,7 +39,7 @@ a{display:block;margin:.75rem 0;font-size:1.1rem}</style></head>
 <body>
 <h1>meta-skill-feedback</h1>
 <p><a href="overview.html">overview.html</a> — what the skill does + eval ladder</p>
-<p><a href="review.html">review.html</a> — PAC benchmark viewer (iteration 2)</p>
+<p><a href="review.html">review.html</a> — PAC benchmark viewer (when available)</p>
 </body></html>
 EOF
 
@@ -51,7 +60,12 @@ echo $! > "$PIDFILE"
 echo "Serving on port $PORT (pid $(cat "$PIDFILE"), bind $BIND)"
 echo "  http://127.0.0.1:$PORT/"
 if [[ "$BIND" == "0.0.0.0" ]]; then
-  IP=$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || true)
+  IP="$(python3 -c "
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(('8.8.8.8', 80))
+print(s.getsockname()[0])
+" 2>/dev/null || true)"
   [[ -n "$IP" ]] && echo "  http://${IP}:$PORT/"
 fi
 echo "Log: $LOG"
