@@ -1,21 +1,21 @@
 # Bootstrapping feedback on a target skill
 
 You are wiring a **runtime friction inbox** onto an **existing target skill**.
-Cody’s ask is usually explicit: use the **meta-skill-feedback** skill to add a
-feedback system to `<target-skill>` (e.g. a CLI helper or triage skill). Load
-meta-skill-feedback first; do not bootstrap from memory alone.
+The human maintainer's ask is usually explicit: use the **meta-skill-feedback**
+skill to add a feedback system to `<target-skill>` (e.g. a CLI helper or triage
+skill). Load meta-skill-feedback first; do not bootstrap from memory alone.
 
 Use judgment; adapt names, sections, and cues to that skill's shape.
 
-**Out of scope:** My Machines wake contracts (`references/wake.md`, `wake.sh`
-prompts). Those belong to the wake / scheduling system. If Cody wants feedback
-cues on unattended runs, he patches wake separately — not via this meta-skill.
+**Out of scope:** scheduled wake/run prompts for unattended agents. If you want
+feedback cues on unattended runs, patch your scheduler's wake prompt separately —
+not via this meta-skill.
 
 ## Minimum deliverables
 
 | Artifact | Purpose |
 |----------|---------|
-| `feedback/resolved/` | Archive after Cody reviews (may stay empty) |
+| `feedback/resolved/` | Archive after human review (may stay empty) |
 | `feedback/README.md` | Instructions for agents *using* this skill |
 | Cue in target `SKILL.md` | So agents see the path before they finish |
 
@@ -77,16 +77,16 @@ _(none yet)_
 
 ## Rules
 
-- One topic per file · duplicates are +1 votes, not new files · no secrets · Cody moves handled notes to `resolved/`
+- One topic per file · duplicates are +1 votes, not new files · no secrets · reviewer moves handled notes to `resolved/`
 ```
 
 ## Adapting to common skill shapes
 
 | Shape | Typical extra work |
 |-------|-------------------|
-| **Wiki + skill** (external Obsidian rules) | In README: "wiki wrong → feedback; rule proposals → `<audit path>`" |
+| **Wiki + skill** (external knowledge base) | In README: "wiki wrong → feedback; rule proposals → `<audit path>`" |
 | **Interactive triage** | Cue in final-report / batch-complete section, not mid-workflow |
-| **Public AE skill** | README note: entries must stay generic; optional gitignore for `feedback/*.md` |
+| **Public skill** | README note: entries must stay generic; optional gitignore for `feedback/*.md` |
 | **Skill with evals** | Link `evals/examples/*.md` from README as the live format sample |
 
 ## Iron laws vs new section
@@ -99,6 +99,12 @@ add feedback there instead of a redundant **Before you finish** — one pointer 
 
 - Run a one-size-fits-all script that blind-patches every skill the same way
 - Add cues in every reference file
-- Create or patch `wake.md` / wake prompts (separate system)
+- Create or patch scheduled wake/run prompts (separate system)
 - Create friction files as part of bootstrap (unless you hit real friction)
 - Replace task-specific outputs (proposals, Slack reports) with feedback files
+
+## Legacy migration
+
+If a skill still writes friction to an **external queue** (wiki page, shared doc,
+old monolithic feedback file), prefer in-skill `feedback/` only. Migrate open
+entries when the maintainer reviews — do not add a second write path.

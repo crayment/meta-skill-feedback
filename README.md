@@ -26,11 +26,11 @@ npx skills add crayment/meta-skill-feedback
 
 **Runtime** (target already has `feedback/README.md`): follow that README at end of a job — new issue → one file; same issue again → +1 vote on the open note.
 
-Human overview: [.agents/skills/meta-skill-feedback/evals/overview.html](.agents/skills/meta-skill-feedback/evals/overview.html)
+Human overview: **[crayment.github.io/meta-skill-feedback/overview.html](https://crayment.github.io/meta-skill-feedback/overview.html)** (rendered) · [source](docs/overview.html)
 
 ## Evals (TDD)
 
-Five [counter-skill](.agents/skills/meta-skill-feedback/evals/fixtures/) fixtures + PAC harness ([provider-agnostic-skill-creator](https://github.com/crayment/provider-agnostic-skill-creator)). Iteration 2: **with_skill 100%**, baseline 32%, delta +0.68.
+Five [counter-skill](.agents/skills/meta-skill-feedback/evals/fixtures/) fixtures + PAC harness ([provider-agnostic-skill-creator](https://github.com/crayment/provider-agnostic-skill-creator)). Iteration 2 (2026-09-05): **with_skill 20/20 checks**, baseline **6/20** (30% checks; 32% mean eval pass-rate), delta **+0.68** — one run per eval, fixture-only, deterministic checks. Early v0, not production validation.
 
 See [.agents/skills/meta-skill-feedback/references/evals.md](.agents/skills/meta-skill-feedback/references/evals.md).
 

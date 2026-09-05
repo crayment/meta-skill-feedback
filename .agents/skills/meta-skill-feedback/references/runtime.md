@@ -13,8 +13,8 @@ Non-routine friction?
   └─ New issue?  →  one new timestamped file (Votes + Agent comments sections)
 ```
 
-Never edit the target skill. Never write to Obsidian `skills-feedback/` unless Cody
-still uses that legacy queue for this skill.
+Never edit the target skill. Never write to a **legacy external feedback queue**
+unless the skill still uses one — prefer in-skill `feedback/` when bootstrapped.
 
 ## New issue — file body
 
@@ -41,7 +41,7 @@ Append to the **existing open file** for that topic:
 Short note — new workaround optional; pure +1 is fine.
 ```
 
-Duplicates are **votes**, not new files. Extra votes signal priority to Cody at review.
+Duplicates are **votes**, not new files. Extra votes signal priority to the reviewer at review time.
 
 ## Example
 

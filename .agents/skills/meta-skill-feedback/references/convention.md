@@ -23,7 +23,7 @@ skill-name/
 State is the filesystem: **move file = change status**. No status enums in filenames.
 
 Duplicate reports of the **same issue** are **+1 votes** on the existing open
-file — extra signal for Cody, not inbox spam.
+file — extra signal for the reviewer, not inbox spam.
 
 ## Filename
 
@@ -68,8 +68,8 @@ Heading slots (omit unknowns, don't invent):
 | Slot | Examples |
 |------|----------|
 | id | `bc-7b8f6238-…`, `local — Cursor` |
-| role/title | `inbox-auto`, `link-dump drain` |
-| machine | `birdhouse-mac-mini`, `Cody's MacBook Pro 2021` |
+| role/title | `email-triage`, `deploy-check` |
+| machine | `ci-runner`, `local-dev-machine` |
 
 ## Votes and agent comments (same issue again)
 
@@ -93,7 +93,7 @@ note after `+1` on the same line.
 **Agent comment** (under `## Agent comments`):
 
 ```markdown
-### 2026-09-05T1024 — bc-abc123 · Cody's Mac
+### 2026-09-05T1024 — bc-abc123 · local-dev-machine
 +1 — same wrong path; used workaround X.
 ```
 
@@ -110,7 +110,7 @@ writing a note. Keep it short:
 - Filename rules above
 - No secrets, tokens, passwords, full email bodies
 - Do not edit the skill — leave notes here
-- Resolved notes live in `resolved/` (Cody moves them)
+- Resolved notes live in `resolved/` (reviewer moves them)
 - Optional: link a real example note from evals or a prior resolved file
 
 ## Not feedback
@@ -119,7 +119,7 @@ Route these elsewhere:
 
 | Situation | Where |
 |-----------|--------|
-| Cody should approve a new inbox/mail rule | task audit log (e.g. `actions.md`) |
+| Human should approve a new automation rule | task audit log (e.g. `actions.md`) |
 | Durable world fact | appropriate wiki page |
 | Skill eval benchmark complaint | eval workspace `feedback.json` |
 | Bug in application code | issue tracker / PR |

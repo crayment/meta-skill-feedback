@@ -10,7 +10,8 @@ and load its `SKILL.md`.
 | Path | Purpose |
 |------|---------|
 | `evals/evals.json` | Prompts + expectations |
-| `evals/overview.html` | Human-readable: skill purpose, what evals test, v0 results |
+| `docs/overview.html` | Rendered on [GitHub Pages](https://crayment.github.io/meta-skill-feedback/overview.html) |
+| `evals/overview.html` | Symlink → `docs/overview.html` (same file) |
 | `evals/fixtures/counter-skill*` | Fake mini-skills (copy-only) |
 | `evals/examples/` | Sample friction notes from passing runs (linked by fixtures) |
 | `scripts/check_eval_outputs.py` | Deterministic checks for grader |
@@ -22,11 +23,13 @@ From this repo root:
 
 ```bash
 SKILL=./.agents/skills/meta-skill-feedback
-PAC=~/dev/me/provider-agnostic-skill-creator/.agents/skills/provider-agnostic-skill-creator
+PAC=/path/to/provider-agnostic-skill-creator/.agents/skills/provider-agnostic-skill-creator
 WS=./meta-skill-feedback-workspace/iteration-N
 FIX=$SKILL/evals/fixtures
 CHK=$SKILL/scripts/check_eval_outputs.py
 ```
+
+Clone PAC separately if needed; point `PAC` at its skill directory.
 
 PAC expects eval directories named `eval-*`. After executor runs, grade each:
 
@@ -37,11 +40,11 @@ python3 $CHK --eval runtime-quiet --outputs $WS/eval-runtime-quiet/with_skill/ou
 cd $PAC && python3 -m scripts.aggregate_benchmark $WS --skill-name meta-skill-feedback
 ```
 
-Iteration 2 (2026-09-05): **with_skill 100%** (20/20), **baseline 32%** (6/19), delta +0.68.
+Iteration 2 (2026-09-05): **with_skill 20/20 checks** (100%), **baseline 6/20 checks** (30%; 32% mean eval pass-rate), delta **+0.68** mean pass-rate. One run per eval; fixture-only; deterministic filesystem checks — early v0, not production validation.
 
 ## Evals (v1)
 
-See **[evals/overview.html](../evals/overview.html)** for a readable summary.
+See **[evals/overview.html](../evals/overview.html)** (symlink to [docs/overview.html](../../../../docs/overview.html)) or the [rendered GitHub Pages version](https://crayment.github.io/meta-skill-feedback/overview.html).
 
 | id | name | Tests |
 |----|------|-------|
@@ -51,7 +54,7 @@ See **[evals/overview.html](../evals/overview.html)** for a readable summary.
 | 4 | runtime-vote | Same bug open → +1 on existing note, no duplicate file |
 | 5 | runtime-stuck | Script fails → friction note, don't patch SKILL.md |
 
-My Machines wake contracts are **not** part of this skill or its evals.
+Scheduled wake/run prompts are **not** part of this skill or its evals.
 
 ## Rules
 

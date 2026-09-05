@@ -27,4 +27,4 @@ See [convention.md](../../../../references/convention.md) or the example link ab
 
 ## Rules
 
-- One topic per file · duplicates are +1 votes · no secrets · Cody moves handled notes to `resolved/`
+- One topic per file · duplicates are +1 votes · no secrets · reviewer moves handled notes to `resolved/`

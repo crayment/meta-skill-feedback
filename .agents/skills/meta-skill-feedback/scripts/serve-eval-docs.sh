@@ -44,11 +44,15 @@ if [[ -f "$PIDFILE" ]]; then
 fi
 
 cd "$STAGE"
-nohup python3 -m http.server "$PORT" --bind 0.0.0.0 >>"$LOG" 2>&1 &
+BIND="${MSF_EVAL_BIND:-127.0.0.1}"
+nohup python3 -m http.server "$PORT" --bind "$BIND" >>"$LOG" 2>&1 &
 echo $! > "$PIDFILE"
 
-IP=$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo "127.0.0.1")
-echo "Serving on port $PORT (pid $(cat "$PIDFILE"))"
+echo "Serving on port $PORT (pid $(cat "$PIDFILE"), bind $BIND)"
 echo "  http://127.0.0.1:$PORT/"
-echo "  http://${IP}:$PORT/"
+if [[ "$BIND" == "0.0.0.0" ]]; then
+  IP=$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || true)
+  [[ -n "$IP" ]] && echo "  http://${IP}:$PORT/"
+fi
 echo "Log: $LOG"
+echo "LAN bind: MSF_EVAL_BIND=0.0.0.0 $0 $PORT"

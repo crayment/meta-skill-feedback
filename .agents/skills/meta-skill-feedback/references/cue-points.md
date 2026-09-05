@@ -3,9 +3,9 @@
 Goal: agents **see** the feedback path without loading this meta-skill. Use **one
 touchpoint** in the target skill — end of `SKILL.md`.
 
-My Machines wake contracts are **out of scope** for this meta-skill. Patch
-`references/wake.md` or `wake.sh` separately if Cody wants unattended runs to
-see the feedback path.
+Scheduled wake/run prompts for unattended agents are **out of scope** for this
+meta-skill. Patch your scheduler's wake prompt separately if you want unattended
+runs to see the feedback path.
 
 ## Required — end of SKILL.md
 
@@ -26,7 +26,7 @@ fits the target skill better.
 ## Optional — second cue (rare)
 
 Add **one** extra cue only where agents repeatedly get lost mid-workflow — and
-only in `SKILL.md` or a domain reference file, not wake:
+only in `SKILL.md` or a domain reference file, not in scheduler wake prompts:
 
 | Skill shape | Where |
 |-------------|--------|
@@ -53,8 +53,8 @@ only in `SKILL.md` or a domain reference file, not wake:
 Do not open a second file. Add **+1** under **Votes** and an **Agent comments**
 entry on the existing open note — see [convention.md](convention.md).
 
-## Legacy Obsidian queues
+## Legacy external queues
 
-If a skill still has `agent-memories/skills-feedback/<name>.md`, **do not add a
-second write path**. Prefer in-skill `feedback/` only; migrate open Obsidian
-entries when Cody reviews.
+If a skill still writes friction to an **external queue** (wiki page, shared doc,
+old monolithic feedback file), **do not add a second write path**. Prefer in-skill
+`feedback/` only; migrate open entries when the maintainer reviews.
