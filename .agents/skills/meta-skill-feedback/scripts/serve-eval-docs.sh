@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Serve meta-skill-feedback eval docs for local review.
+# Serve static meta-skill-feedback docs (overview + snapshot review.html).
 # Usage: serve-eval-docs.sh [port]
-#   overview.html — skill + eval explainer
-#   review.html   — PAC benchmark viewer (when present in MSF_EVAL_WORKSPACE)
+#
+# Static only — PAC feedback does NOT save here. For live review + feedback.json
+# use scripts/serve-eval-review.sh instead.
 
 set -euo pipefail
 
