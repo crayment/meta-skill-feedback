@@ -8,8 +8,10 @@ open friction files and decides skill edits.
 From a repo root or home skills tree:
 
 ```bash
-find .agents/skills -path '*/feedback/*.md' ! -path '*/feedback/resolved/*' ! -name README.md 2>/dev/null
+find .agents/skills -path '*/feedback/*.md' ! -path '*/feedback/resolved/*' ! -path '*/evals/*' ! -name README.md 2>/dev/null
 ```
+
+`! -path '*/evals/*'` skips eval fixtures, whose `feedback/` folders hold seeded test notes, not real friction.
 
 Or one skill:
 

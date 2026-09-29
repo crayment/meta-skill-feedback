@@ -42,6 +42,7 @@ See [.agents/skills/meta-skill-feedback/references/evals.md](.agents/skills/meta
 .agents/skills/meta-skill-feedback/
 ├── SKILL.md
 ├── references/          # convention, bootstrap, runtime, evals
+├── feedback/            # live friction inbox for this skill (not a fixture)
 ├── evals/               # evals.json, fixtures, overview.html
 └── scripts/             # check_eval_outputs.py, serve-eval-docs.sh
 meta-skill-feedback-workspace/   # gitignored PAC iteration runs

@@ -16,6 +16,7 @@ and load its `SKILL.md`.
 | `evals/examples/` | Sample friction notes from passing runs (linked by fixtures) |
 | `scripts/check_eval_outputs.py` | Deterministic checks for grader |
 | `meta-skill-feedback-workspace/` | Iteration runs (gitignored, repo sibling) |
+| `feedback/` (skill root) | Live inbox for this skill — **not** an eval asset; executors never copy it or write to it |
 
 ## Quick run
 

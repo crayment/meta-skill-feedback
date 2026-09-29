@@ -74,6 +74,15 @@ document that in the skill's own README.
 See [references/review.md](references/review.md) — sweep open files, brief,
 edit skill, move notes to `resolved/`.
 
+## Before you finish
+
+If *this skill's* guidance misled you while bootstrapping or following the
+convention — a template that did not fit, cue-point advice with no home, vote
+rules you had to guess — write **one file** in this skill's own
+[feedback/](feedback/README.md). Friction in the target skill goes in the
+target's inbox; eval runs never write here or under `evals/fixtures/`. Do not
+edit this skill. Skip when the run was routine.
+
 ## References
 
 | File | Purpose |
