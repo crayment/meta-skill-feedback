@@ -11,7 +11,7 @@ From a repo root or home skills tree:
 find .agents/skills -path '*/feedback/*.md' ! -path '*/feedback/resolved/*' ! -path '*/evals/*' ! -name README.md 2>/dev/null
 ```
 
-`! -path '*/evals/*'` skips eval fixtures, whose `feedback/` folders hold seeded test notes, not real friction.
+`! -path '*/evals/*'` skips eval fixtures kept inside a skill folder (the default skill-creator layout), whose `feedback/` folders hold seeded test notes, not real friction.
 
 Or one skill:
 

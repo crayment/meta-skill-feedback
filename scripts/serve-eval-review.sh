@@ -8,8 +8,7 @@
 set -euo pipefail
 
 PORT="${1:-3117}"
-SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DEFAULT_WS="$REPO_ROOT/meta-skill-feedback-workspace"
 PAC="${PAC_SKILL_ROOT:-$HOME/dev/me/provider-agnostic-skill-creator/.agents/skills/provider-agnostic-skill-creator}"
 

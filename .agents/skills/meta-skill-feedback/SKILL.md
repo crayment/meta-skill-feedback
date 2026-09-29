@@ -80,7 +80,7 @@ If *this skill's* guidance misled you while bootstrapping or following the
 convention — a template that did not fit, cue-point advice with no home, vote
 rules you had to guess — write **one file** in this skill's own
 [feedback/](feedback/README.md). Friction in the target skill goes in the
-target's inbox; eval runs never write here or under `evals/fixtures/`. Do not
+target's inbox; eval runs never write here or into the repo's eval fixtures. Do not
 edit this skill. Skip when the run was routine.
 
 ## References
@@ -92,6 +92,6 @@ edit this skill. Skip when the run was routine.
 | [references/runtime.md](references/runtime.md) | Runtime decision tree, votes, new vs +1 |
 | [references/cue-points.md](references/cue-points.md) | Where to patch target skills |
 | [references/review.md](references/review.md) | Review and resolve workflow |
-| [references/evals.md](references/evals.md) | PAC eval harness (v0 fixtures) |
+| [references/evals.md](references/evals.md) | PAC eval harness; fixtures live in the repo's root `evals/`, not in this folder |
 
-Readable HTML overview: [evals/overview.html](evals/overview.html) · [rendered on GitHub Pages](https://crayment.github.io/meta-skill-feedback/overview.html)
+Readable HTML overview: [rendered on GitHub Pages](https://crayment.github.io/meta-skill-feedback/overview.html) · source at `docs/overview.html` in the [repo](https://github.com/crayment/meta-skill-feedback)

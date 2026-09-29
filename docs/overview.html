@@ -127,7 +127,7 @@
 
     <section>
       <h2>Counter-skill fixtures</h2>
-      <p class="lead">All evals use the same fictional <strong>counter-skill</strong> family under <code>evals/fixtures/</code> — copy-only mini-skills, never mutated in place.</p>
+      <p class="lead">All evals use the same fictional <strong>counter-skill</strong> family under the repo-root <code>evals/fixtures/</code>, outside the skill folder so harnesses never list them as installed skills — copy-only mini-skills, never mutated in place.</p>
       <table>
         <tr><th>Fixture</th><th>Role</th></tr>
         <tr><td><code>counter-skill</code></td><td>Bare — bootstrap eval</td></tr>
@@ -246,7 +246,7 @@
         <li>We have deterministic checks + a PAC-shaped loop to iterate.</li>
       </ul>
       <p>Iteration 2: all five evals pass with skill (20/20 checks). Baseline 6/20 checks (30%) — mostly fails where discipline matters (don’t edit SKILL, vote don’t duplicate).</p>
-      <p style="font-size:0.85rem;color:var(--muted);margin-top:0.75rem;">Run details: <code>references/evals.md</code> · prompts: <code>evals/evals.json</code></p>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:0.75rem;">Run details: <code>.agents/skills/meta-skill-feedback/references/evals.md</code> · prompts: <code>evals/evals.json</code></p>
     </section>
   </div>
 </body>

@@ -3,12 +3,14 @@
 This is the **live inbox for the meta-skill-feedback skill**: the convention,
 its templates, and its references. It is **not an eval fixture**.
 
-- Eval fixtures live only under `evals/fixtures/<name>/`. Their `feedback/`
-  folders (and the seeded `2026-08-01T1200-wrong-data-path.md`) are test data.
-  Never add, vote on, or move notes there.
+- Eval fixtures live outside this skill folder, under the repo root's
+  `evals/fixtures/<name>/`. Their `feedback/` folders (and the seeded
+  `2026-08-01T1200-wrong-data-path.md`) are test data. Never add, vote on, or
+  move notes there.
 - **During an eval run, never write here.** Executors copy fixtures into their
-  `outputs/` and write notes there, as the eval prompt says. The checker in
-  `scripts/check_eval_outputs.py` reads only `outputs/` and `evals/fixtures/`.
+  `outputs/` and write notes there, as the eval prompt says. The repo-root
+  checker `scripts/check_eval_outputs.py` reads only `outputs/` and
+  `evals/fixtures/`.
 - Friction in the **target skill** you bootstrapped or ran goes in *that*
   skill's `feedback/`, not here.
 
@@ -55,7 +57,7 @@ the runtime vote rules, and the review workflow**, so write here for:
 
 ## Example
 
-[evals/examples/sample-friction-note.md](../evals/examples/sample-friction-note.md)
+[evals/examples/sample-friction-note.md](../../../../evals/examples/sample-friction-note.md) (repo root)
 shows the note shape from a passing eval run. It is an example, not an open note.
 
 ## Filename (new issues only)

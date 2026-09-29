@@ -8,8 +8,7 @@
 set -euo pipefail
 
 PORT="${1:-8765}"
-SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DEFAULT_WS="$REPO_ROOT/meta-skill-feedback-workspace"
 if [[ -n "${MSF_EVAL_WORKSPACE:-}" ]]; then
   WS="$MSF_EVAL_WORKSPACE"
@@ -24,7 +23,7 @@ PIDFILE="${TMPDIR:-/tmp}/msf-eval-docs.pid"
 LOG="${TMPDIR:-/tmp}/msf-eval-docs.log"
 
 mkdir -p "$STAGE"
-ln -sf "$SKILL_DIR/evals/overview.html" "$STAGE/overview.html"
+ln -sf "$REPO_ROOT/docs/overview.html" "$STAGE/overview.html"
 if [[ -f "$WS/review.html" ]]; then
   ln -sf "$WS/review.html" "$STAGE/review.html"
 else

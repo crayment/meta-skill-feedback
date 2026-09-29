@@ -45,5 +45,6 @@ Duplicates are **votes**, not new files. Extra votes signal priority to the revi
 
 ## Example
 
-If the skill ships eval fixtures, `evals/examples/sample-friction-note.md` in
-meta-skill-feedback shows a representative new-issue note from a passing eval run.
+`evals/examples/sample-friction-note.md` at the root of the
+[meta-skill-feedback repo](https://github.com/crayment/meta-skill-feedback)
+shows a representative new-issue note from a passing eval run.

@@ -5,7 +5,15 @@ fork PAC into this skill. Install from
 [provider-agnostic-skill-creator](https://github.com/crayment/provider-agnostic-skill-creator)
 and load its `SKILL.md`.
 
+Eval assets live at the **repo root**, not inside the skill folder, and do not
+ship with the skill. Harnesses that discover nested `SKILL.md` files would
+otherwise list the counter-skill fixtures as installed skills. This departs from
+PAC's default of `evals/` inside the skill: paths in `evals/evals.json` are
+relative to the repo root.
+
 ## Layout
+
+All paths are relative to the repo root.
 
 | Path | Purpose |
 |------|---------|
@@ -15,8 +23,9 @@ and load its `SKILL.md`.
 | `evals/fixtures/counter-skill*` | Fake mini-skills (copy-only) |
 | `evals/examples/` | Sample friction notes from passing runs (linked by fixtures) |
 | `scripts/check_eval_outputs.py` | Deterministic checks for grader |
-| `meta-skill-feedback-workspace/` | Iteration runs (gitignored, repo sibling) |
-| `feedback/` (skill root) | Live inbox for this skill — **not** an eval asset; executors never copy it or write to it |
+| `scripts/serve-eval-docs.sh`, `scripts/serve-eval-review.sh` | Local overview and live PAC review servers |
+| `meta-skill-feedback-workspace/` | Iteration runs (gitignored) |
+| `.agents/skills/meta-skill-feedback/feedback/` | Live inbox for this skill — **not** an eval asset; executors never copy it or write to it |
 
 ## Quick run
 
@@ -26,11 +35,13 @@ From this repo root:
 SKILL=./.agents/skills/meta-skill-feedback
 PAC=/path/to/provider-agnostic-skill-creator/.agents/skills/provider-agnostic-skill-creator
 WS=./meta-skill-feedback-workspace/iteration-N
-FIX=$SKILL/evals/fixtures
-CHK=$SKILL/scripts/check_eval_outputs.py
+FIX=./evals/fixtures
+CHK=./scripts/check_eval_outputs.py
 ```
 
-Clone PAC separately if needed; point `PAC` at its skill directory.
+Clone PAC separately if needed; point `PAC` at its skill directory. Pass
+`$SKILL` as the with-skill `skill_path`, and resolve eval `files` from the repo
+root.
 
 PAC expects eval directories named `eval-*`. After executor runs, grade each:
 
@@ -45,7 +56,7 @@ Iteration 2 (2026-09-05): **with_skill 20/20 checks** (100%), **baseline 6/20 ch
 
 ## Evals (v1)
 
-See **[evals/overview.html](../evals/overview.html)** (symlink to [docs/overview.html](../../../../docs/overview.html)) or the [rendered GitHub Pages version](https://crayment.github.io/meta-skill-feedback/overview.html).
+See **[docs/overview.html](../../../../docs/overview.html)** (also at `evals/overview.html`) or the [rendered GitHub Pages version](https://crayment.github.io/meta-skill-feedback/overview.html).
 
 | id | name | Tests |
 |----|------|-------|

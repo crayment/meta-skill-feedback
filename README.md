@@ -32,21 +32,25 @@ Human overview: **[crayment.github.io/meta-skill-feedback/overview.html](https:/
 
 ## Evals (TDD)
 
-Five [counter-skill](.agents/skills/meta-skill-feedback/evals/fixtures/) fixtures + PAC harness ([provider-agnostic-skill-creator](https://github.com/crayment/provider-agnostic-skill-creator)). Iteration 2 (2026-09-05): **with_skill 20/20 checks**, baseline **6/20** (30% checks; 32% mean eval pass-rate), delta **+0.68** — one run per eval, fixture-only, deterministic checks. Early v0, not production validation.
+Five [counter-skill](evals/fixtures/) fixtures + PAC harness ([provider-agnostic-skill-creator](https://github.com/crayment/provider-agnostic-skill-creator)). Iteration 2 (2026-09-05): **with_skill 20/20 checks**, baseline **6/20** (30% checks; 32% mean eval pass-rate), delta **+0.68** — one run per eval, fixture-only, deterministic checks. Early v0, not production validation.
 
 See [.agents/skills/meta-skill-feedback/references/evals.md](.agents/skills/meta-skill-feedback/references/evals.md).
 
 ## Layout
 
 ```
-.agents/skills/meta-skill-feedback/
+.agents/skills/meta-skill-feedback/   # the skill — only this ships
 ├── SKILL.md
-├── references/          # convention, bootstrap, runtime, evals
-├── feedback/            # live friction inbox for this skill (not a fixture)
-├── evals/               # evals.json, fixtures, overview.html
-└── scripts/             # check_eval_outputs.py, serve-eval-docs.sh
+├── references/          # convention, bootstrap, runtime, review, evals
+└── feedback/            # live friction inbox for this skill (not a fixture)
+evals/                   # evals.json, fixtures, examples, overview.html
+scripts/                 # check_eval_outputs.py, serve-eval-*.sh
+docs/                    # GitHub Pages overview
 meta-skill-feedback-workspace/   # gitignored PAC iteration runs
 ```
+
+Eval fixtures sit at the repo root, outside the skill folder, so harnesses that
+discover nested `SKILL.md` files do not list them as installed skills.
 
 ## Related
 
