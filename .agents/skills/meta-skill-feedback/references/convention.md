@@ -17,7 +17,7 @@ skill-name/
 | Path | Meaning |
 |------|---------|
 | `feedback/*.md` except `README.md` | **Open** — needs review |
-| `feedback/resolved/` | **Done** — reviewed; skill may already be updated |
+| `feedback/resolved/` | **Done** — reviewed; each ends with a `## Resolution` section: what changed, or why nothing did |
 | `feedback/README.md` | Agent instructions (loaded on demand) |
 
 State is the filesystem: **move file = change status**. No status enums in filenames.
@@ -110,7 +110,7 @@ writing a note. Keep it short:
 - Filename rules above
 - No secrets, tokens, passwords, full email bodies
 - Do not edit the skill — leave notes here
-- Resolved notes live in `resolved/` (reviewer moves them)
+- Resolved notes live in `resolved/` (the reviewer adds a resolution and moves them)
 - Optional: link a real example note from evals or a prior resolved file
 
 ## Not feedback

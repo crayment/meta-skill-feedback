@@ -13,7 +13,7 @@ license: Apache-2.0
 
 Add a **runtime friction inbox** to an existing skill. Agents leave notes after
 surprises — new issues get a file; repeat issues get **+1 votes** on the open
-file. The skill maintainer reviews and edits the skill; resolved notes move to `feedback/resolved/`.
+file. The skill maintainer reviews and edits the skill; resolved notes get a resolution and move to `feedback/resolved/`.
 
 This is **not** eval-harness feedback (JSON in a workspace). It is **not**
 task output (rule proposals, audit logs). It is: *the skill misled me, I had to
@@ -72,7 +72,7 @@ document that in the skill's own README.
 ## Review (human)
 
 See [references/review.md](references/review.md) — sweep open files, brief,
-edit skill, move notes to `resolved/`.
+edit skill, add a resolution to each note, move it to `resolved/`.
 
 ## Before you finish
 

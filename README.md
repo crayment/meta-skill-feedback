@@ -2,7 +2,7 @@
 
 Agent skill for adding a **runtime friction inbox** to other skills — `feedback/` folder, vote/+1 on repeat issues, and finish-line cues in `SKILL.md`.
 
-Agents leave timestamped notes when something misled them; you review, edit the skill, and move notes to `feedback/resolved/`. Not task output (audit logs, rule proposals) and not PAC eval `feedback.json`.
+Agents leave timestamped notes when something misled them; you review, edit the skill, note the resolution, and move notes to `feedback/resolved/`. Not task output (audit logs, rule proposals) and not PAC eval `feedback.json`.
 
 ## Install
 

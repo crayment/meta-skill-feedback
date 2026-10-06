@@ -77,7 +77,7 @@ _(none yet)_
 
 ## Rules
 
-- One topic per file · duplicates are +1 votes, not new files · no secrets · reviewer moves handled notes to `resolved/`
+- One topic per file · duplicates are +1 votes, not new files · no secrets · reviewer adds a `## Resolution` and moves handled notes to `resolved/`
 ```
 
 ## Adapting to common skill shapes
