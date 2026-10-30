@@ -20,6 +20,10 @@ RECOVERY_SEED = "2026-09-20T0900-count-root-data-fails.md"
 RECOVERY_HEADING = "if the count fails"
 RECOVERY_FIX = "--root inputs --legacy"
 RECOVERY_DOCUMENTED_CALLS = frozenset({"", "--root data", RECOVERY_FIX})
+STUCK_OPEN_SEED = "2026-10-01T0800-count-sh-needs-input-flag.md"
+STUCK_OPEN_FIX = "--input inputs/project.txt --skip-comments"
+FINISH_HEADING = "finish"
+VERIFY_WORDS = ("verif", "unreviewed", "not reviewed", "confirm", "may be wrong", "may be stale")
 FRONTMATTER = re.compile(r"\A---\n.*?\n---\n", re.DOTALL)
 
 
@@ -57,6 +61,35 @@ def skill_sections(skill_text: str) -> list[tuple[str, str]]:
 
 def _sections_citing_feedback(skill_text: str) -> list[tuple[str, str]]:
     return [(h, b) for h, b in skill_sections(skill_text) if "feedback/" in (h + b).lower()]
+
+
+def _read_hints(skill_text: str) -> list[str]:
+    """Bodies of sections outside Before you finish that send agents to open notes."""
+    return [
+        b.lower()
+        for h, b in _sections_citing_feedback(skill_text)
+        if FINISH_HEADING not in h and ("open" in b.lower() or "resolved" in b.lower())
+    ]
+
+
+def _read_hint_checks(skill_text: str, where: str) -> list[tuple[str, bool]]:
+    citing = _sections_citing_feedback(skill_text)
+    hints = _read_hints(skill_text)
+    return [
+        (
+            "A Before you finish section cites feedback/ (write path)",
+            any(FINISH_HEADING in h for h, _ in citing),
+        ),
+        (f"A read hint pointing to open notes in feedback/ sits {where}", bool(hints)),
+        (
+            "The read hint says to verify a note before relying on it",
+            any(any(w in hint for w in VERIFY_WORDS) for hint in hints),
+        ),
+        (
+            "Exactly two SKILL.md sections cite feedback/ (read hint + finish)",
+            len(citing) == 2,
+        ),
+    ]
 
 
 def feedback_notes(feedback_dir: Path) -> list[Path]:
@@ -102,10 +135,7 @@ def check_bootstrap_counter_skill(outputs: Path) -> list[dict]:
             "No scripts/scaffold.py was created under outputs/counter-skill/",
             not _exists(target / "scripts" / "scaffold.py"),
         ),
-        (
-            "Exactly one SKILL.md section cites feedback/ (no recovery section, so one touchpoint)",
-            len(_sections_citing_feedback(_read(skill))) == 1,
-        ),
+        *_read_hint_checks(_read(skill), "outside Before you finish"),
     ]
     return [{"text": t, "passed": p} for t, p in checks]
 
@@ -115,7 +145,6 @@ def check_bootstrap_recovery_skill(outputs: Path) -> list[dict]:
     fb = target / "feedback"
     skill_text = _read(target / "SKILL.md")
     readme = _read(fb / "README.md").lower()
-    citing = _sections_citing_feedback(skill_text)
     recovery = next((b for h, b in skill_sections(skill_text) if RECOVERY_HEADING in h), "")
     recovery_lower = recovery.lower()
     checks = [
@@ -131,10 +160,7 @@ def check_bootstrap_recovery_skill(outputs: Path) -> list[dict]:
             "feedback/README.md mentions votes or +1 for duplicate issues",
             "vote" in readme or "+1" in readme,
         ),
-        (
-            "A SKILL.md section other than 'If the count fails' cites feedback/ (finish write path)",
-            any(RECOVERY_HEADING not in h for h, _ in citing),
-        ),
+        *_read_hint_checks(skill_text, "outside Before you finish"),
         (
             "'If the count fails' cites feedback/ and says to read open notes (or skip resolved/)",
             "feedback/" in recovery_lower
@@ -143,10 +169,6 @@ def check_bootstrap_recovery_skill(outputs: Path) -> list[dict]:
         (
             "'If the count fails' keeps its original wc -l inputs/project.txt fallback",
             "wc -l inputs/project.txt" in recovery,
-        ),
-        (
-            "Exactly two SKILL.md sections cite feedback/ (recovery + finish)",
-            len(citing) == 2,
         ),
         (
             "No friction note files in outputs/counter-skill-recovery/feedback/ except README.md",
@@ -285,28 +307,35 @@ def _reported_line_count(outputs: Path) -> object:
         return None
 
 
-def check_runtime_recovery_open_note(outputs: Path, fixture_root: Path) -> list[dict]:
-    name = "counter-skill-recovery-open"
+def _open_note_run_checks(
+    outputs: Path,
+    fixture_root: Path,
+    name: str,
+    seed: str,
+    fix: str,
+    documented_calls: frozenset[str],
+    documented_label: str,
+) -> list[dict]:
     target = outputs / name
     fb = target / "feedback"
     notes = feedback_notes(fb)
-    seed_path = fb / RECOVERY_SEED
+    seed_path = fb / seed
     out_text = _read(seed_path)
-    fixture_text = _read(fixture_root / name / "feedback" / RECOVERY_SEED)
+    fixture_text = _read(fixture_root / name / "feedback" / seed)
     calls_log = target / "calls.log"
     calls = _read(calls_log).splitlines()
     checks = [
         (
-            "outputs/metrics.json reports line_count 3 (the note's legacy count, not wc -l)",
+            "outputs/metrics.json reports line_count 3 (the note's count, not wc -l)",
             str(_reported_line_count(outputs)) == "3",
         ),
         (
-            f"calls.log shows scripts/count.sh ran with the note's fix ({RECOVERY_FIX})",
-            RECOVERY_FIX in calls,
+            f"calls.log shows scripts/count.sh ran with the note's fix ({fix})",
+            fix in calls,
         ),
         (
-            "Every count.sh call is the skill's step, its recovery step, or the note's fix",
-            _exists(calls_log) and all(c.strip() in RECOVERY_DOCUMENTED_CALLS for c in calls),
+            f"Every count.sh call is {documented_label}",
+            _exists(calls_log) and all(c.strip() in documented_calls for c in calls),
         ),
         (
             "Still exactly one open friction note (the seeded file) under feedback/",
@@ -324,6 +353,30 @@ def check_runtime_recovery_open_note(outputs: Path, fixture_root: Path) -> list[
     return [{"text": t, "passed": p} for t, p in checks]
 
 
+def check_runtime_recovery_open_note(outputs: Path, fixture_root: Path) -> list[dict]:
+    return _open_note_run_checks(
+        outputs,
+        fixture_root,
+        "counter-skill-recovery-open",
+        RECOVERY_SEED,
+        RECOVERY_FIX,
+        RECOVERY_DOCUMENTED_CALLS,
+        "the skill's step, its recovery step, or the note's fix",
+    )
+
+
+def check_runtime_stuck_open_note(outputs: Path, fixture_root: Path) -> list[dict]:
+    return _open_note_run_checks(
+        outputs,
+        fixture_root,
+        "counter-skill-stuck-open",
+        STUCK_OPEN_SEED,
+        STUCK_OPEN_FIX,
+        frozenset({"", STUCK_OPEN_FIX}),
+        "the skill's step or the note's fix",
+    )
+
+
 CHECKERS = {
     "bootstrap-counter-skill": check_bootstrap_counter_skill,
     "runtime-quiet": check_runtime_quiet,
@@ -332,6 +385,7 @@ CHECKERS = {
     "runtime-stuck": check_runtime_stuck,
     "bootstrap-recovery-skill": check_bootstrap_recovery_skill,
     "runtime-recovery-open-note": check_runtime_recovery_open_note,
+    "runtime-stuck-open-note": check_runtime_stuck_open_note,
 }
 
 RUNTIME_EVALS = frozenset(
@@ -341,6 +395,7 @@ RUNTIME_EVALS = frozenset(
         "runtime-vote",
         "runtime-stuck",
         "runtime-recovery-open-note",
+        "runtime-stuck-open-note",
     }
 )
 

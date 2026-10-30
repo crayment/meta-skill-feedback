@@ -17,7 +17,7 @@ not via this meta-skill.
 |----------|---------|
 | `feedback/resolved/` | Archive after human review (may stay empty) |
 | `feedback/README.md` | Instructions for agents *using* this skill |
-| Cue in target `SKILL.md` | So agents see the path before they finish |
+| Read hint + write cue in target `SKILL.md` | So stuck agents check open notes first, and finishing agents know where to write |
 
 ## feedback/README.md — starter template
 
@@ -86,15 +86,15 @@ _(none yet)_
 |-------|-------------------|
 | **Wiki + skill** (external knowledge base) | In README: "wiki wrong → feedback; rule proposals → `<audit path>`" |
 | **Interactive triage** | Cue in final-report / batch-complete section, not mid-workflow |
-| **Failure or recovery section** | One extra line there: read open `feedback/` notes before a new workaround. Routine runs skip the inbox. **Before you finish** stays the write path |
+| **Failure or recovery section** | Put the read hint there (see [cue-points.md](cue-points.md)); with no such section, on the step most likely to break, else under the intro |
 | **Public skill** | README note: entries must stay generic; optional gitignore for `feedback/*.md` |
 | **Skill with evals** | Link `evals/examples/*.md` from README as the live format sample |
 
 ## Hard rules vs new section
 
 If the target skill already has a **hard rules** (non-negotiable constraints) or **Final report** checklist,
-add feedback there instead of a redundant **Before you finish** — one pointer to
-`feedback/README.md` is enough.
+put the write cue there instead of a redundant **Before you finish** — one pointer to
+`feedback/README.md` is enough. The read hint still goes where agents get stuck.
 
 ## Do not
 
