@@ -8,10 +8,6 @@ After a **non-routine** surprise, leave feedback here. Do not edit the skill.
 2. **Same issue already open?** Add **+1** under **Votes** and a short **Agent comments** entry.
 3. **New issue?** Create one timestamped file.
 
-## Example note
-
-[sample-friction-note.md](../../../examples/sample-friction-note.md) — from a passing runtime-friction eval run.
-
 ## When to write
 
 - Something misled you or required discovery not in the skill
@@ -23,7 +19,37 @@ After a **non-routine** surprise, leave feedback here. Do not edit the skill.
 
 ## New issue — body
 
-See [convention.md](../../../../references/convention.md) or the example link above.
+```markdown
+# YYYY-MM-DD — <id> · <role/title> · <machine>
+
+## Context
+One or two sentences: what you were trying to finish.
+
+## What happened
+Specific: wrong path, missing step, misleading instruction, workaround you used.
+
+## Suggestion (optional)
+Smallest change that would have prevented the friction.
+
+## Votes
+
+- **YYYY-MM-DDTHHMM** — <id> · opened
+
+## Agent comments
+
+_(none yet)_
+```
+
+## Same issue — vote and comment
+
+Under **Votes**: `- **YYYY-MM-DDTHHMM** — <id> · +1`
+
+Under **Agent comments**:
+
+```markdown
+### YYYY-MM-DDTHHMM — <id> · <machine>
++1 — what you saw; any new workaround.
+```
 
 ## Rules
 

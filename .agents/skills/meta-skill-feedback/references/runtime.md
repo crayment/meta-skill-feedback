@@ -2,6 +2,10 @@
 
 Load `<skill>/feedback/README.md` at the end of the primary workflow.
 
+Mid-run, if the skill does not match what you see, skim the open notes in
+`feedback/` before inventing a workaround. A note is an unreviewed report from
+an earlier run: verify its fix before relying on it.
+
 ## Decision tree
 
 ```
