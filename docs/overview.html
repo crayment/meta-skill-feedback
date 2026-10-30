@@ -135,6 +135,8 @@
         <tr><td><code>counter-skill-trap</code></td><td>Wrong <code>data/project.txt</code> path — new friction note</td></tr>
         <tr><td><code>counter-skill-dedupe</code></td><td>Trap + seeded open note — +1 vote eval</td></tr>
         <tr><td><code>counter-skill-stuck</code></td><td><code>scripts/count.sh</code> exits 1 — blocked run</td></tr>
+        <tr><td><code>counter-skill-recovery</code></td><td>Bare, with an “If the count fails” section — recovery-cue bootstrap</td></tr>
+        <tr><td><code>counter-skill-recovery-open</code></td><td>Stale recovery step + open note holding the fix; <code>count.sh</code> logs its calls — read-before-workaround run</td></tr>
       </table>
       <p style="font-size:0.85rem;color:var(--muted);">Sample note: <code>evals/examples/sample-friction-note.md</code> (refresh from a passing runtime-friction run).</p>
     </section>
@@ -180,6 +182,18 @@
           <td>One note about failure; SKILL unchanged.</td>
           <td><span class="pill yes">ran</span></td>
         </tr>
+        <tr>
+          <td><strong>bootstrap-recovery-skill</strong></td>
+          <td>Copy <code>counter-skill-recovery</code> → install inbox on a skill that has a recovery section.</td>
+          <td>Read-open-notes line inside the recovery section; finish cue elsewhere; exactly two sections cite <code>feedback/</code>; original fallback kept.</td>
+          <td><span class="pill yes">ran</span></td>
+        </tr>
+        <tr>
+          <td><strong>runtime-recovery-open-note</strong></td>
+          <td><code>counter-skill-recovery-open</code> — normal job; prompt never mentions feedback.</td>
+          <td>Count is the note’s 3, not <code>wc -l</code>’s 5; <code>calls.log</code> has only documented calls plus the note’s fix; +1 on the open note; SKILL unchanged.</td>
+          <td><span class="pill yes">ran</span></td>
+        </tr>
       </table>
 
       <p style="margin-top:0.85rem;"><strong>Eval ladder:</strong></p>
@@ -189,6 +203,8 @@
         <li><strong>friction</strong> — misled → new file with vote format?</li>
         <li><strong>vote</strong> — same issue → +1 on existing file?</li>
         <li><strong>stuck</strong> — hard fail → note without patching skill?</li>
+        <li><strong>recovery bootstrap</strong> — read-open-notes line lands in the recovery section, and only there?</li>
+        <li><strong>recovery runtime</strong> — recovery step fails → open note’s fix before an invented one?</li>
       </ul>
     </section>
 
@@ -198,8 +214,22 @@
       <ul>
         <li><strong>with_skill</strong> — executor reads meta-skill-feedback</li>
         <li><strong>without_skill</strong> — same prompt, no meta-skill (agent improvises)</li>
+        <li><strong>old_skill</strong> — same prompt, a snapshot of the previous skill version (iteration 3 onward)</li>
       </ul>
       <p><code>scripts/check_eval_outputs.py</code> checks filesystem facts; PAC aggregates into <code>benchmark.md</code> + review viewer.</p>
+
+      <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--muted);">Iteration 3 · all seven evals · recovery-section cue vs a snapshot of <code>main</code> (old_skill) · 1 run per eval:</p>
+      <div class="bar-wrap">
+        <span style="width:5rem;">with_skill</span>
+        <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
+        <strong>35/35 checks (100%)</strong>
+      </div>
+      <div class="bar-wrap">
+        <span style="width:5rem;">old_skill</span>
+        <div class="bar"><div class="bar-fill warn" style="width:97%"></div></div>
+        <strong>34/35 checks (97%)</strong>
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);">No regressions: every eval ties except bootstrap-recovery-skill, where <code>main</code> put a write cue in the recovery section instead of a read-open-notes line. runtime-recovery-open-note passes on both because its fixture already carries the cue.</p>
 
       <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--muted);">Iteration 2 · all five evals · 1 run per eval · fixture-only · deterministic filesystem checks:</p>
       <div class="bar-wrap">

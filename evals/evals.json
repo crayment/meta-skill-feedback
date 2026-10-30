@@ -13,7 +13,8 @@
         "outputs/counter-skill/SKILL.md references feedback/ or feedback/README.md",
         "feedback/README.md mentions votes or +1 for duplicate issues",
         "No friction note files in outputs/counter-skill/feedback/ except README.md",
-        "No scripts/scaffold.py was created under outputs/counter-skill/"
+        "No scripts/scaffold.py was created under outputs/counter-skill/",
+        "Exactly one SKILL.md section cites feedback/ (no recovery section, so one touchpoint)"
       ]
     },
     {
@@ -70,6 +71,42 @@
         "Exactly one new friction note in outputs/counter-skill-stuck/feedback/",
         "Note mentions count.sh failure, exit, or blocked run",
         "outputs/counter-skill-stuck/SKILL.md unchanged from fixture"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "bootstrap-recovery-skill",
+      "prompt": "Add a runtime friction-feedback inbox to the target skill using meta-skill-feedback.\n\nTarget (copy — do not edit the fixture under evals/): work inside your outputs directory.\n\n1. Copy `evals/fixtures/counter-skill-recovery/` to `outputs/counter-skill-recovery/`.\n2. Bootstrap feedback on `outputs/counter-skill-recovery/` per meta-skill-feedback (feedback/, README with vote/+1 rules, cues in SKILL.md only).\n3. Write `outputs/metrics.json` with `{ \"eval\": \"bootstrap-recovery-skill\", \"target\": \"outputs/counter-skill-recovery\" }`.\n4. Write `transcript.md` summarizing steps.\n\nDo not seed example friction notes unless you hit real friction during this task.",
+      "expected_output": "Inbox installed; Before you finish write cue; one read-open-notes line inside 'If the count fails'; original recovery steps kept.",
+      "files": ["evals/fixtures/counter-skill-recovery/SKILL.md"],
+      "expectations": [
+        "outputs/counter-skill-recovery/feedback/README.md exists",
+        "outputs/counter-skill-recovery/feedback/resolved/ exists as a directory",
+        "feedback/README.md mentions votes or +1 for duplicate issues",
+        "A SKILL.md section other than 'If the count fails' cites feedback/ (finish write path)",
+        "'If the count fails' cites feedback/ and says to read open notes (or skip resolved/)",
+        "'If the count fails' keeps its original wc -l inputs/project.txt fallback",
+        "Exactly two SKILL.md sections cite feedback/ (recovery + finish)",
+        "No friction note files in outputs/counter-skill-recovery/feedback/ except README.md"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "runtime-recovery-open-note",
+      "prompt": "Run counter-skill-recovery-open as a normal unattended job. No human is available.\n\n1. Copy `evals/fixtures/counter-skill-recovery-open/` to `outputs/counter-skill-recovery-open/` (keep the script executable).\n2. Follow `outputs/counter-skill-recovery-open/SKILL.md` from inside that copy and get the project line count it asks for.\n3. Do **not** edit SKILL.md.\n4. Write `outputs/metrics.json` with `{ \"eval\": \"runtime-recovery-open-note\", \"line_count\": <the count you report> }`, and `transcript.md` listing each command you ran in order.",
+      "expected_output": "Agent follows the recovery section's cue to the open note, uses its fix (count 3), +1s the note; no invented flags, no duplicate note, SKILL.md unchanged.",
+      "files": [
+        "evals/fixtures/counter-skill-recovery-open/SKILL.md",
+        "evals/fixtures/counter-skill-recovery-open/scripts/count.sh",
+        "evals/fixtures/counter-skill-recovery-open/feedback/2026-09-20T0900-count-root-data-fails.md"
+      ],
+      "expectations": [
+        "outputs/metrics.json reports line_count 3 (the note's legacy count, not wc -l)",
+        "calls.log shows scripts/count.sh ran with the note's fix (--root inputs --legacy)",
+        "Every count.sh call is the skill's step, its recovery step, or the note's fix",
+        "Still exactly one open friction note (the seeded file) under feedback/",
+        "Seeded note has a new +1 vote line",
+        "outputs/counter-skill-recovery-open/SKILL.md unchanged from fixture"
       ]
     }
   ]
