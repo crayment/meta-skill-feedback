@@ -86,6 +86,7 @@ _(none yet)_
 |-------|-------------------|
 | **Wiki + skill** (external knowledge base) | In README: "wiki wrong → feedback; rule proposals → `<audit path>`" |
 | **Interactive triage** | Cue in final-report / batch-complete section, not mid-workflow |
+| **Failure or recovery section** | One extra line there: read open `feedback/` notes before a new workaround. Routine runs skip the inbox. **Before you finish** stays the write path |
 | **Public skill** | README note: entries must stay generic; optional gitignore for `feedback/*.md` |
 | **Skill with evals** | Link `evals/examples/*.md` from README as the live format sample |
 

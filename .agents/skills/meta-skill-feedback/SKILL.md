@@ -44,12 +44,14 @@ agents are out of scope — do not create or patch them from this skill.
    - `feedback/README.md` — agent-facing instructions; start from the template in
      bootstrap.md and trim or extend for this skill (e.g. external wiki paths or
      task outputs that are *not* feedback)
-4. **Cue future agents** — one touchpoint in `SKILL.md`; see
+4. **Cue future agents** — see
    [references/cue-points.md](references/cue-points.md):
-   - Required: **Before you finish** (or equivalent) near the end of `SKILL.md`
+   - Required: **Before you finish** (or equivalent) near the end of `SKILL.md`. This is the write path.
+   - Optional, only when the skill has a failure or recovery section: one line there to read open `feedback/` notes (skip `resolved/`) before inventing a workaround. A routine run does not open the inbox.
    Match the target skill's voice and section names; do not paste boilerplate
    blindly if a hard-rules section or final-report step already exists — extend those.
 5. **Verify** by reading back: an agent finishing a routine run knows to skip;
+   an agent whose recovery section still does not match knows to read open notes before a new workaround;
    an agent hitting repeat friction knows to vote +1 on an open note.
 6. Summarize for the human what you added and where. Do **not** seed example friction
    files unless this bootstrap run itself hit friction worth recording.

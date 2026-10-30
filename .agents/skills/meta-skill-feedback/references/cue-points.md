@@ -26,11 +26,17 @@ fits the target skill better.
 ## Optional — second cue (rare)
 
 Add **one** extra cue only where agents repeatedly get lost mid-workflow — and
-only in `SKILL.md` or a domain reference file, not in automation run prompts:
+only in `SKILL.md` or a domain reference file, not in automation run prompts.
+
+When the skill has a failure or recovery section (an error path, an auth
+failure, a UI map), put that cue **there**. One line: if that section still
+does not match what you see, read the open notes in `feedback/` (skip
+`resolved/`) before inventing a workaround. A routine run does not open the
+inbox. **Before you finish** stays the write path.
 
 | Skill shape | Where |
 |-------------|--------|
-| Multi-phase workflow | After error recovery or auth failure section |
+| Failure or recovery section | After that section: read open `feedback/` notes before a new workaround |
 | External wiki paths | Next to the path table: "wiki wrong/missing → `feedback/`" |
 | Long reference chains | Do **not** cue in every reference — end of SKILL.md is enough |
 
